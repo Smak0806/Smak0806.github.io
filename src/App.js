@@ -1,6 +1,6 @@
 
-import './App.css';
-import Logo from './logo.svg';
+import './styles.css';
+//import Logo from './logo.svg';
 import MyHeader from './components/header';
 import TopSection from './components/topsection';
 import MidSection from './components/midsection';

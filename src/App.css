@@ -1,8 +1,45 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
 }
 
-.App-logo {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,4 +72,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+}*/
