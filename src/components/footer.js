@@ -5,7 +5,8 @@ class MyFooter extends Component{
   
   render(){
     return (
-      <footer className="App-footer"><h5>foooooooter: EL CULO ME PICA</h5>
+      <footer className="App-footer">
+        <h5>foooooooter: EL CULO ME PICA</h5>
       </footer>
     );
   }

@@ -1,3 +1,8 @@
+h1,h2,h3,h4,h5,h6{
+    margin:0;
+    padding:0;
+}
+
 .App{
     width: 100%;
     margin: 0;
@@ -8,5 +13,14 @@
     font-size: calc(10px + 2vmin);
     color: white;
     background-color: #282c34;
+    min-height: 100vh;
+}
 
+.navbar{
+    height:80px;
+    background: black;
+}
+
+.navbar a{
+    height: inherit;
 }
