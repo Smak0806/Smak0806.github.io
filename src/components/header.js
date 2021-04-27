@@ -20,11 +20,15 @@ function handleClick(e) {
   for (let index = 0; index < items.length; index++) {
     const element = items[index];
     
-    if(element.style.display=="none")
+    if(document.getElementById('toggler').style.display==='block'){ 
+      if(element.style.display=="none")
       element.style.display = "block";
-    else
+      else
       element.style.display = "none";
   }
+   
+  
+    }
 
 }
 
