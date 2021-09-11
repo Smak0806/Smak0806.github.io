@@ -11,12 +11,15 @@
 
 #ultra-super-mega-long-muchotexto-paragraph{
     margin:1em 6em;
-    font-size: 10px;
+    font-size: 16px;
+}
+#ultra-super-mega-long-muchotexto-paragraph>p{
+    margin-bottom: 1.5em;
 }
 #muchoTexto{
     display:none;
-    width: 70%;
-    margin: 2em;
+    width: 50%;
+    margin: 2em auto;
 }
 
 .container{
@@ -32,7 +35,7 @@
 .sideBar{
     display: flex;
     flex-flow: column;
-    width: 25%;
+    width: 80%;
     background-color: #091c49;
 }
 
@@ -76,6 +79,15 @@
 .profileSkills{
     width: 90%;
     margin: 0 auto;
+}
+
+.profileSkills>div{
+    margin-bottom: 3em;
+}
+
+.profileSkills>div>h1{
+    margin-bottom: 1em;
+    margin-left: 1em;
 }
 
 .bodyBanner{
@@ -130,4 +142,9 @@
 .npm{width: 15%; background-color: #da61cf;}
 .php {width: 65%; background-color: #808080;}
 .sql{width: 30%; background-color: #64a084;}
+
+.spanish{width: 100%; background-color: #eea3a3;border-radius: 10px}
+.english{width: 60%; background-color: #82ad7f;}
+.italian {width: 40%; background-color: #7ad2dd;}
+.french{width: 30%; background-color: #5f9c5a;}
 
