@@ -10,8 +10,8 @@
 .bodyBanner > section > div > ul{margin:1em auto; list-style-type: circle;}
 
 .profileInfoBanner > h2 {font-size:26px;font-weight:bolder}
-.profileInfoBanner > h3 {font-size:24px;}
-.profileInfoBanner > h3 > a{color:#cecece}
+.profileInfoBanner > h3 {font-size:20px;}
+.profileInfoBanner > h3 > a{color:#cecece; font-size:20px;}
 .profileInfoBanner > h3 > a:hover{ color:#69c3f7;}
 
 .profileIndex > ul > li > a{color:#cecece;}
@@ -125,6 +125,7 @@
 
 .imageBanner>img{
     width:100%;
+    max-width: 500px;
 }
 
 .tittleBanner{
@@ -164,14 +165,22 @@
   
 .html {width: 90%; background-color: #04AA6D;}
 .css {width: 60%; background-color: #2196F3;}
+.bootstrap {width: 60%; background-color: #a4db5c;}
 .js {width: 65%; background-color: #f44336;}
 .jQuery{width: 50%; background-color: #9d9e54;}
 .npm{width: 15%; background-color: #da61cf;}
+.nodejs{width: 15%; background-color: #82cf95;}
+.nextjs{width: 15%; background-color: #8a72c2;}
+.ionic{width: 15%; background-color: #ceda61;}
 .php {width: 65%; background-color: #808080;}
+.laravel {width: 20%; background-color: #c084e7;}
 .sql{width: 30%; background-color: #64a084;}
+.ads{width: 15%; background-color: #994d93;}
+.taskManager{width: 15%; background-color: #6163da;}
+.analytics{width: 15%; background-color: #ebcd6d;}
 
 .spanish{width: 100%; background-color: #eea3a3;border-radius: 10px; }
-.english{width: 60%; background-color: #82ad7f;}
+.english{width: 70%; background-color: #82ad7f;}
 .italian {width: 40%; background-color: #7ad2dd;}
 .french{width: 30%; background-color: #5f9c5a;}
 
