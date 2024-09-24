@@ -9,6 +9,20 @@
 .bodyBanner > section > div > p {margin:1em auto; font-size:16px;}
 .bodyBanner > section > div > ul{margin:1em auto; list-style-type: circle;}
 
+.profileInfoBanner > h2 {font-size:26px;font-weight:bolder}
+.profileInfoBanner > h3 {font-size:24px;}
+.profileInfoBanner > h3 > a{color:#cecece}
+.profileInfoBanner > h3 > a:hover{ color:#69c3f7;}
+
+.profileIndex > ul > li > a{color:#cecece;}
+.profileIndex > ul > li > a:hover{color:#69c3f7;}
+
+.bodyBanner > section > div > ul > li > a{color:#cecece;}
+.bodyBanner > section > div > ul > li > a:hover{color:#69c3f7;}
+
+.bodyBanner > section > div > p > a{color:#6cdcf8; text-decoration: underline;}
+.bodyBanner > section > div > p > a:hover{color:#40b3f5;}
+
 #ultra-super-mega-long-muchotexto-paragraph{
     margin: 1em 2em;
     font-size: 18px;
