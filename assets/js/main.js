@@ -45,31 +45,31 @@ $(document).ready(function() {
          // Get current language
          const currentLang = $('html').attr('lang') || 'es';
          
-         // Call the PHP function to generate PDF via AJAX
-         $.ajax({
-             url: 'generate-pdf.php',
-             method: 'POST',
-             data: {
-                 lang: currentLang
-             },
-             success: function(response) {
-                 const data = JSON.parse(response);
-                 if (data.success) {
-                     // Create a link element to trigger download
-                     const link = document.createElement('a');
-                     link.href = data.file;
-                     link.download = data.filename;
-                     document.body.appendChild(link);
-                     link.click();
-                     document.body.removeChild(link);
-                 } else {
-                     alert('Error generating CV. Please try again later.');
-                 }
-             },
-             error: function() {
-                 alert('Error connecting to server. Please try again later.');
-             }
-         });
+          // Call the PHP function to generate PDF via AJAX
+          $.ajax({
+               url: 'generate-pdf.php',
+               method: 'POST',
+               data: {
+                    lang: currentLang
+               },
+               success: function(response) {
+                    const data = JSON.parse(response);
+                    if (data.success) {
+                         // Create a link element to trigger download
+                         const link = document.createElement('a');
+                         link.href = data.file;
+                         link.download = data.filename;
+                         document.body.appendChild(link);
+                         link.click();
+                         document.body.removeChild(link);
+                    } else {
+                         alert('Error generating CV. Please try again later.');
+                    }
+               },
+               error: function() {
+                    alert('Error connecting to server. Please try again later.');
+               }
+          });
      });
      
      // Set social media URLs from config

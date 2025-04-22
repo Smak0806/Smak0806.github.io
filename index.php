@@ -1,14 +1,6 @@
 <?php
 // Include the configuration file with global variables
 require_once './config.php';
-// Include the content file with multilingual support
-require_once './index-content.php';
-
-// Function to generate a PDF version of the CV
-function generatePDF() {
-    // This function will be implemented to generate a PDF
-    // compatible with European AI format
-}
 
 // Determine the language
 $lang = 'es'; // Default language is Spanish
@@ -20,11 +12,18 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['es', 'en'])) {
     $lang = $_COOKIE['preferred_lang'];
 }
 
-// Function to get text based on current language
-function t($category, $key) {
-    global $content, $lang;
-    return $content[$lang][$category][$key] ?? "Missing text for: $category.$key";
-}
+// Get content based on language
+$content = $config;
+$personal_info = getContent('personal_info', $lang);
+$skills = getContent('skills', $lang);
+$languages = getContent('languages', $lang);
+$education = getContent('education', $lang);
+$experience = getContent('experience', $lang);
+$projects = getContent('projects', $lang);
+$ui = getContent('ui', $lang);
+$about = getContent('about', $lang);
+
+echo "<script>console.log(".json_encode($config).");</script>";
 
 // Function to get the alternate language
 function altLang() {
@@ -42,6 +41,56 @@ function langSwitchUrl() {
 
 // Alt language text
 $altLangText = $lang === 'es' ? 'EN' : 'ES';
+
+// Function to translate UI elements
+function t($section, $key) {
+    global $ui, $about, $skills, $experience, $education, $projects, $personal_info;
+    
+     if ($section == 'navbar') {
+          return $ui['section_titles'][$key] ?? "Missing text";
+     } elseif ($section == 'downloadCV') {
+          return $ui['download_cv'] ?? "Download CV";
+     } elseif ($section == 'hero') {
+          if ($key == 'contact_me') return $ui['hero']['contact_me'];
+          if ($key == 'linkedin') return $ui['hero']['linkedin'];
+          if ($key == 'github') return $ui['hero']['github'];
+     } elseif ($section == 'about') {
+          if ($key == 'title') return $ui['section_titles']['about'];
+          if ($key == 'personal_info') return $ui['about']['personal_info'];
+          if ($key == 'location') return $ui['about']['location'];
+          if ($key == 'from') return $ui['about']['from'];
+          if ($key == 'living_in_spain') return $ui['about']['living_in_spain'];
+          if ($key == 'birth_date') return $ui['about']['birth_date'];
+          if ($key == 'email') return $ui['about']['email'];
+          if ($key == 'professional_summary') return $ui['about']['professional_summary'];
+          if ($key == 'professional_text1') return $ui['about']['professional_text1'];
+          if ($key == 'professional_text2') return $ui['about']['professional_text2'];
+     } elseif ($section == 'skills') {
+          if ($key == 'title') return $ui['section_titles']['skills'] ?? "Skills";
+          if ($key == 'languages_tab') return $ui['skills_section']['languages_tab'];
+          if ($key == 'frameworks_tab') return $ui['skills_section']['frameworks_tab'];
+          if ($key == 'tools_tab') return $ui['skills_section']['tools_tab'];
+          if ($key == 'other_tab') return $ui['skills_section']['other_tab'];
+          if ($key == 'languages_title') return $ui['section_titles']['languages'] ?? "Languages";
+     } elseif ($section == 'experience') {
+          if ($key == 'title') return $ui['section_titles']['experience'] ?? "Professional Experience";
+          if ($key == 'to') return "to";
+          if ($key == 'present') return $ui['current'] ?? "Present";
+     } elseif ($section == 'education') {
+          if ($key == 'title') return $ui['section_titles']['education'] ?? "Education";
+          if ($key == 'to') return "to";
+          if ($key == 'description') return $ui['education_section']['description'];
+          if ($key == 'skills_gained') return $ui['education_section']['skills_gained'];
+          if ($key == 'certificates') return $ui['education_section']['certificates'];
+     } elseif ($section == 'projects') {
+          if ($key == 'title') return $ui['section_titles']['projects'] ?? "Projects";
+          if ($key == 'view_project') return $ui['view_project'] ?? "View Project";
+     } elseif ($section == 'footer') {
+          if ($key == 'rights') return "All rights reserved";
+     }
+    
+    return "Missing text for: $section.$key";
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>" data-theme="dark">
@@ -66,84 +115,94 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        maven: ['"Maven Pro"', 'sans-serif']
-                    },
-                    colors: {
-                        'primary-dark': '#1e1e2e',
-                        'secondary-dark': '#2a2a3c',
-                        'accent-blue': '#3b82f6',
-                        'accent-purple': '#8b5cf6',
-                        'text-light': '#f3f4f6',
+          tailwind.config = {
+               theme: {
+                    extend: {
+                         fontFamily: {
+                              sans: ['Inter', 'sans-serif'],
+                              maven: ['"Maven Pro"', 'sans-serif']
+                         },
+                         colors: {
+                              'primary-dark': '#1e1e2e',
+                              'secondary-dark': '#2a2a3c',
+                              'accent-blue': '#3b82f6',
+                              'accent-purple': '#8b5cf6',
+                              'text-light': '#f3f4f6',
+                         }
                     }
-                }
-            }
-        }
+               }
+          }
     </script>
+
+    <style>
+          .hero {
+               background-image: url('public/jumbo.webp');
+               background-size: cover;
+               background-position: center;
+               background-repeat: no-repeat;
+          }
+
+    </style>
 </head>
 <body class="bg-base-300 text-base-content font-sans">
     <!-- Navbar -->
-    <nav class="navbar sticky top-0 z-50 bg-base-200 shadow-lg">
-        <div class="navbar-start">
-            <div class="dropdown">
-                <label tabindex="0" class="btn btn-ghost lg:hidden">
-                    <i class="fas fa-bars"></i>
-                </label>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52">
-                    <li><a href="#about"><?= t('navbar', 'about') ?></a></li>
-                    <li><a href="#skills"><?= t('navbar', 'skills') ?></a></li>
-                    <li><a href="#experience"><?= t('navbar', 'experience') ?></a></li>
-                    <li><a href="#education"><?= t('navbar', 'education') ?></a></li>
-                    <li><a href="#projects"><?= t('navbar', 'projects') ?></a></li>
-                </ul>
-            </div>
-            <a class="btn btn-ghost normal-case text-xl font-maven">Santiago Cabrera</a>
-        </div>
-        <div class="navbar-center hidden lg:flex">
-            <ul class="menu menu-horizontal px-1">
-                <li><a href="#about" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'about') ?></a></li>
-                <li><a href="#skills" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'skills') ?></a></li>
-                <li><a href="#experience" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'experience') ?></a></li>
-                <li><a href="#education" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'education') ?></a></li>
-                <li><a href="#projects" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'projects') ?></a></li>
-            </ul>
-        </div>
-        <div class="navbar-end">
-            <a href="<?= langSwitchUrl() ?>" class="btn btn-ghost mr-2">
-                <i class="fas fa-language mr-1"></i> <?= $altLangText ?>
-            </a>
-            <!--<button id="downloadCV" class="btn btn-primary"><?= t('downloadCV', '') ?> <i class="fas fa-download ml-2"></i></button>-->
-        </div>
-    </nav>
+     <nav class="navbar sticky top-0 z-50 bg-base-200 shadow-lg">
+          <div class="navbar-start">
+               <div class="dropdown">
+                    <label tabindex="0" class="btn btn-ghost lg:hidden">
+                         <i class="fas fa-bars"></i>
+                    </label>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52">
+                         <li><a href="#about"><?= t('navbar', 'about') ?></a></li>
+                         <li><a href="#skills"><?= t('navbar', 'skills') ?></a></li>
+                         <li><a href="#experience"><?= t('navbar', 'experience') ?></a></li>
+                         <li><a href="#education"><?= t('navbar', 'education') ?></a></li>
+                         <li><a href="#projects"><?= t('navbar', 'projects') ?></a></li>
+                    </ul>
+               </div>
+               <a class="btn btn-ghost normal-case text-xl font-maven">Santiago Cabrera</a>
+          </div>
+          <div class="navbar-center hidden lg:flex">
+               <ul class="menu menu-horizontal px-1">
+                    <li><a href="#about" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'about') ?></a></li>
+                    <li><a href="#skills" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'skills') ?></a></li>
+                    <li><a href="#experience" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'experience') ?></a></li>
+                    <li><a href="#education" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'education') ?></a></li>
+                    <li><a href="#projects" class="hover:text-primary hover:bg-base-100"><?= t('navbar', 'projects') ?></a></li>
+               </ul>
+          </div>
+          <div class="navbar-end">
+               <a href="<?= langSwitchUrl() ?>" class="btn btn-ghost mr-2">
+                    <i class="fas fa-language mr-1"></i> <?= $altLangText ?>
+               </a>
+               <button id="downloadCV" class="btn btn-primary"><?= t('navbar', 'downloadCV') ?> <i class="fas fa-download ml-2"></i></button>
+          </div>
+     </nav>
 
     <!-- Hero Section -->
-    <section class="hero min-h-[70vh] bg-base-200">
-        <div class="hero-content flex-col lg:flex-row-reverse">
-            <div class="profile-image-container">
-                <img src="<?= $personal_info['photo'] ?>" class="max-w-sm rounded-lg shadow-2xl profile-image" alt="<?= $personal_info['name'] ?>">
-            </div>
-            <div>
-                <h1 class="text-5xl font-bold font-maven"><?= $personal_info['name'] ?></h1>
-                <h2 class="text-2xl mt-2 text-primary"><?= $personal_info['title'] ?></h2>
-                <p class="py-6"><?= $personal_info['about'][$lang] ?? $personal_info['about'] ?></p>
-                <div class="flex flex-wrap gap-3">
-                    <a href="mailto:<?= $personal_info['email'] ?>" class="btn btn-primary">
-                        <i class="fas fa-envelope mr-2"></i> <?= t('hero', 'contact_me') ?>
-                    </a>
-                    <a href="#" class="btn btn-outline btn-accent" id="linkedinBtn">
-                        <i class="fab fa-linkedin mr-2"></i> <?= t('hero', 'linkedin') ?>
-                    </a>
-                    <a href="#" class="btn btn-outline" id="githubBtn">
-                        <i class="fab fa-github mr-2"></i> <?= t('hero', 'github') ?>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+     <section class="hero min-h-[70vh] bg-base-200">
+          <div class="hero-content flex-col lg:flex-row-reverse bg-black bg-opacity-70 p-10 rounded-lg shadow-lg">
+               <div class="profile-image-container">
+                    <img src="<?= $personal_info['photo'] ?>" class="max-w-sm rounded-lg shadow-2xl profile-image" alt="<?= $personal_info['name'] ?>">
+               </div>
+               <div>
+                    <h1 class="text-5xl font-bold font-maven"><?= $personal_info['name'] ?></h1>
+                    <h2 class="text-2xl mt-2 text-primary"><?= $personal_info['title'] ?></h2>
+                    <p class="py-6 text-white"><?= $personal_info['about'] ?></p>
+                    <div class="flex flex-wrap gap-3">
+                         <a href="mailto:<?= $personal_info['email'] ?>" class="btn btn-primary">
+                              <i class="fas fa-envelope mr-2"></i> <?= t('hero', 'contact_me') ?>
+                         </a>
+                         <a href="https://www.linkedin.com/in/santiago-cabrerag/" class="btn btn-outline btn-accent" id="linkedinBtn">
+                              <i class="fab fa-linkedin mr-2"></i> <?= t('hero', 'linkedin') ?>
+                         </a>
+                         <a href="https://github.com/Smak0806" class="btn btn-outline" id="githubBtn">
+                              <i class="fab fa-github mr-2"></i> <?= t('hero', 'github') ?>
+                         </a>
+                    </div>
+               </div>
+          </div>
+     </section>
 
     <!-- About Section -->
     <section id="about" class="py-16 bg-base-100">
@@ -154,7 +213,7 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
                     <h3 class="text-xl font-semibold mb-4"><i class="fas fa-user-circle mr-2 text-primary"></i> <?= t('about', 'personal_info') ?></h3>
                     <ul class="space-y-3">
                         <li><strong><?= t('about', 'location') ?>:</strong> <?= $personal_info['location'] ?></li>
-                        <li><strong><?= t('about', 'from') ?>:</strong> <?= $personal_info['birthplace'] ?> (<?= t('about', 'living_in_spain') ?>)</li>
+                        <li><strong><?= t('about', 'from') ?>:</strong> <?= $personal_info['birthplace'] ?> (<?= $personal_info['living_in_spain'] ?>)</li>
                         <li><strong><?= t('about', 'birth_date') ?>:</strong> <?= $personal_info['birthdate'] ?></li>
                         <li><strong><?= t('about', 'email') ?>:</strong> <a href="mailto:<?= $personal_info['email'] ?>" class="link link-primary"><?= $personal_info['email'] ?></a></li>
                     </ul>
@@ -258,21 +317,17 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
                 <div class="timeline-item <?= $index % 2 === 0 ? 'left' : 'right' ?>">
                     <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300">
                         <div class="card-body">
-                            <h3 class="card-title text-xl font-bold"><?= $job['title'][$lang] ?? $job['title'] ?></h3>
+                            <h3 class="card-title text-xl font-bold"><?= $job['title'] ?></h3>
                             <h4 class="text-lg text-primary"><?= $job['company'] ?></h4>
                             <p class="text-sm opacity-80">
                                 <?= $job['location'] ?> | 
                                 <?= $job['start_date'] ?> 
                                 <?= t('experience', 'to') ?> 
-                                <?= $job['end_date'] == 'Present' ? t('experience', 'present') : $job['end_date'] ?>
+                                <?= $job['end_date'] == 'Present' || $job['end_date'] == 'Actualidad' ? t('experience', 'present') : $job['end_date'] ?>
                             </p>
                             
                             <ul class="mt-4 space-y-2">
-                                <?php 
-                                // Use language-specific descriptions if available
-                                $descriptions = isset($job['description'][$lang]) ? $job['description'][$lang] : $job['description'];
-                                foreach ($descriptions as $item): 
-                                ?>
+                                <?php foreach ($job['description'] as $item): ?>
                                 <li class="flex">
                                     <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
                                     <span><?= $item ?></span>
@@ -304,8 +359,8 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
                 <?php foreach ($education as $edu): ?>
                 <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
                     <div class="card-body">
-                        <h3 class="card-title text-xl"><?= $edu['degree'][$lang] ?? $edu['degree'] ?></h3>
-                        <h4 class="text-lg text-primary"><?= $edu['field'][$lang] ?? $edu['field'] ?></h4>
+                        <h3 class="card-title text-xl"><?= $edu['degree'] ?></h3>
+                        <h4 class="text-lg text-primary"><?= $edu['field'] ?></h4>
                         <p class="text-sm opacity-80">
                             <?= $edu['institution'] ?>, <?= $edu['location'] ?> | 
                             <?= $edu['start_date'] ?> 
@@ -317,11 +372,7 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
                         <div class="mt-4">
                             <h5 class="font-medium mb-2"><?= t('education', 'description') ?></h5>
                             <ul class="space-y-2">
-                                <?php 
-                                // Use language-specific descriptions if available
-                                $descriptions = isset($edu['description'][$lang]) ? $edu['description'][$lang] : $edu['description'];
-                                foreach ($descriptions as $item): 
-                                ?>
+                                <?php foreach ($edu['description'] as $item): ?>
                                 <li class="flex">
                                     <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
                                     <span><?= $item ?></span>
@@ -335,11 +386,7 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
                         <div class="mt-4">
                             <h5 class="font-medium mb-2"><?= t('education', 'skills_gained') ?></h5>
                             <ul class="space-y-2">
-                                <?php 
-                                // Use language-specific skills if available
-                                $skills = isset($edu['skills_gained'][$lang]) ? $edu['skills_gained'][$lang] : $edu['skills_gained'];
-                                foreach ($skills as $skill): 
-                                ?>
+                                <?php foreach ($edu['skills_gained'] as $skill): ?>
                                 <li class="flex">
                                     <i class="fas fa-check text-accent mt-1 mr-2"></i>
                                     <span><?= $skill ?></span>
@@ -361,7 +408,7 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
                                         <?php foreach ($edu['certificates'] as $cert): ?>
                                         <li>
                                             <a href="<?= $cert['url'] ?>" target="_blank" class="link link-primary">
-                                                <?= $cert['name'][$lang] ?? $cert['name'] ?> <i class="fas fa-external-link-alt text-xs"></i>
+                                                <?= $cert['name'] ?> <i class="fas fa-external-link-alt text-xs"></i>
                                             </a>
                                         </li>
                                         <?php endforeach; ?>
@@ -386,8 +433,8 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
                 <?php foreach ($projects as $project): ?>
                 <div class="card bg-base-200 shadow-xl hover:-translate-y-2 transition-all duration-300">
                     <div class="card-body">
-                        <h3 class="card-title"><?= $project['name'][$lang] ?? $project['name'] ?></h3>
-                        <p><?= $project['description'][$lang] ?? $project['description'] ?></p>
+                        <h3 class="card-title"><?= $project['name'] ?></h3>
+                        <p><?= $project['description'] ?></p>
                         <div class="flex flex-wrap gap-2 my-4">
                             <?php foreach ($project['technologies'] as $tech): ?>
                             <span class="badge badge-outline"><?= $tech ?></span>
@@ -409,13 +456,13 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
     <footer class="footer footer-center p-10 bg-base-200 text-base-content">
         <div>
             <p class="font-bold text-xl"><?= $personal_info['name'] ?></p>
-            <p><?= $personal_info['title'][$lang] ?? $personal_info['title'] ?></p>
-            <p>© <?= date('Y') ?> - <?= t('footer', 'rights') ?></p>
+            <p><?= $personal_info['title'] ?></p>
+            <p>Don't ask me about PHP (: </p>
         </div> 
         <div>
             <div class="grid grid-flow-col gap-4">
-                <a href="#" class="btn btn-circle btn-outline"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="btn btn-circle btn-outline"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/santiago-cabrerag/" class="btn btn-circle btn-outline"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Smak0806/" class="btn btn-circle btn-outline"><i class="fab fa-github"></i></a>
                 <a href="mailto:<?= $personal_info['email'] ?>" class="btn btn-circle btn-outline"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
@@ -436,5 +483,35 @@ $altLangText = $lang === 'es' ? 'EN' : 'ES';
     <script>
         // Add information about active language to body for CSS styling purposes
         document.body.setAttribute('data-lang', '<?= $lang ?>');
+        
+        // Handle skill tabs
+        $(document).ready(function() {
+            $('.skill-tab').click(function() {
+                // Remove active class from all tabs
+                $('.skill-tab').removeClass('active');
+                // Add active class to clicked tab
+                $(this).addClass('active');
+                
+                // Hide all content
+                $('.skill-content').addClass('hidden');
+                // Show content for clicked tab
+                $('#' + $(this).data('target') + '-content').removeClass('hidden');
+            });
+            
+            // Back to top button functionality
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#backToTop').removeClass('opacity-0 invisible').addClass('opacity-100 visible');
+                } else {
+                    $('#backToTop').removeClass('opacity-100 visible').addClass('opacity-0 invisible');
+                }
+            });
+            
+            $('#backToTop').click(function() {
+                $('html, body').animate({scrollTop: 0}, 500);
+                return false;
+            });
+        });
     </script>
-</body
+</body>
+</html>
