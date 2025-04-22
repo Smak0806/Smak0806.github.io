@@ -1,168 +1,100 @@
 $(document).ready(function() {
-     // Theme switcher
-     $('.theme-selector button').on('click', function() {
-         const theme = $(this).data('set-theme');
-         $('html').attr('data-theme', theme);
-         localStorage.setItem('preferred-theme', theme);
+     // Skill tabs handling
+     $('.skill-tab').click(function() {
+         const target = $(this).data('target');
+         
+         // Update active tab
+         $('.skill-tab').removeClass('active');
+         $(this).addClass('active');
+         
+         // Show corresponding content
+         $('.skill-content').addClass('hidden');
+         $(`#${target}-content`).removeClass('hidden');
      });
      
-     // Load saved theme preference
-     const savedTheme = localStorage.getItem('preferred-theme');
-     if (savedTheme) {
-         $('html').attr('data-theme', savedTheme);
-     }
+     // Back to top button
+     const backToTopBtn = $('#backToTop');
      
-     // Smooth scrolling for anchor links
+     $(window).scroll(function() {
+         if ($(this).scrollTop() > 300) {
+             backToTopBtn.removeClass('opacity-0 invisible').addClass('opacity-100 visible');
+         } else {
+             backToTopBtn.removeClass('opacity-100 visible').addClass('opacity-0 invisible');
+         }
+     });
+     
+     backToTopBtn.click(function() {
+         $('html, body').animate({scrollTop: 0}, 800);
+         return false;
+     });
+     
+     // Smooth scrolling for navigation links
      $('a[href^="#"]').on('click', function(e) {
-         e.preventDefault();
-         const target = $(this.hash);
+         const target = $(this.getAttribute('href'));
+         
          if (target.length) {
+             e.preventDefault();
              $('html, body').animate({
-                 scrollTop: target.offset().top - 70
+                 scrollTop: target.offset().top - 80 // Offset for fixed navbar
              }, 800);
          }
      });
      
-     // Initialize animations
-     checkAnimations();
-     
-     // Check for animations on scroll
-     $(window).on('scroll', function() {
-          checkAnimations();
+     // Download CV button
+     $('#downloadCV').click(function() {
+         // Get current language
+         const currentLang = $('html').attr('lang') || 'es';
+         
+         // Call the PHP function to generate PDF via AJAX
+         $.ajax({
+             url: 'generate-pdf.php',
+             method: 'POST',
+             data: {
+                 lang: currentLang
+             },
+             success: function(response) {
+                 const data = JSON.parse(response);
+                 if (data.success) {
+                     // Create a link element to trigger download
+                     const link = document.createElement('a');
+                     link.href = data.file;
+                     link.download = data.filename;
+                     document.body.appendChild(link);
+                     link.click();
+                     document.body.removeChild(link);
+                 } else {
+                     alert('Error generating CV. Please try again later.');
+                 }
+             },
+             error: function() {
+                 alert('Error connecting to server. Please try again later.');
+             }
+         });
      });
      
-     // Check if elements are in viewport and animate them
-     function checkAnimations() {
-          $('.animate-on-scroll').each(function() {
-               //const elementTop = $(this).offset().top;
-               //const elementBottom = elementTop + $(this).outerHeight();
-               //const elementTop = $(this).offset().top;
-               //const elementBottom = elementTop + $(this).outerHeight();
-               const viewportTop = $(window).scrollTop();
-               const viewportBottom = viewportTop + $(window).height();
-            
-            if (elementBottom > viewportTop && elementTop < viewportBottom) {
-                $(this).addClass('active');
-            }
-        });
-    }
-    
-    // Typing animation for hero section
-    const titleElement = $('.hero h1');
-    const originalTitle = titleElement.text();
-    
-    if (titleElement.length && !sessionStorage.getItem('animation-played')) {
-        titleElement.text('');
-        let i = 0;
-        const typeWriter = () => {
-            if (i < originalTitle.length) {
-                titleElement.text(titleElement.text() + originalTitle.charAt(i));
-                i++;
-                setTimeout(typeWriter, 100);
-            } else {
-                sessionStorage.setItem('animation-played', 'true');
-            }
-        };
-        setTimeout(typeWriter, 500);
-    }
-    
-    // Skill bars animation
-    $('.skills-section').waypoint({
-        handler: function(direction) {
-            $('.skills .progress-bar').each(function() {
-                const progressValue = $(this).attr('aria-valuenow');
-                $(this).css('width', progressValue + '%');
-            });
-            this.destroy();
-        },
-        offset: '80%'
-    });
-    
-    // Skills hover effect
-    $('.skill-card').hover(
-        function() {
-            $(this).addClass('shadow-lg transform -translate-y-1');
-        },
-        function() {
-            $(this).removeClass('shadow-lg transform -translate-y-1');
-        }
-    );
-    
-    // Add fade effect to timeline items when scrolled into view
-    $(window).on('scroll', function() {
-        $('.timeline-item').each(function() {
-            if ($(this).offset().top < $(window).scrollTop() + $(window).height() - 100) {
-                $(this).addClass('opacity-100').removeClass('opacity-0');
-            }
-        });
-    });
-    
-    // Initialize tooltips
-    $('[data-toggle="tooltip"]').tooltip();
-    
-    // Mobile navigation toggle
-    $('.navbar-toggler').on('click', function() {
-        $('#main-navbar').toggleClass('show');
-    });
-    
-    // Print CV button
-    $('#print-cv').on('click', function(e) {
-        e.preventDefault();
-        window.print();
-    });
-    
-    // Keyboard navigation
-    $(document).keydown(function(e) {
-        // Navigate sections with arrow keys
-        if (e.key === 'ArrowDown') {
-            let nextSection = getNextSection();
-            if (nextSection) {
-                $('html, body').animate({
-                    scrollTop: $(nextSection).offset().top - 70
-                }, 800);
-            }
-        } else if (e.key === 'ArrowUp') {
-            let prevSection = getPreviousSection();
-            if (prevSection) {
-                $('html, body').animate({
-                    scrollTop: $(prevSection).offset().top - 70
-                }, 800);
-            }
-        }
-    });
-    
-    // Get next visible section
-    function getNextSection() {
-        const sections = ['#about', '#experience', '#skills', '#education', '#projects'];
-        const scrollPosition = $(window).scrollTop();
-        
-        for (let i = 0; i < sections.length; i++) {
-            const sectionTop = $(sections[i]).offset().top;
-            
-            if (sectionTop > scrollPosition + 100) {
-                return sections[i];
-            }
-        }
-        
-        return null;
-    }
-    
-    // Get previous visible section
-    function getPreviousSection() {
-        const sections = ['#about', '#experience', '#skills', '#education', '#projects'];
-        const scrollPosition = $(window).scrollTop();
-        let prev = null;
-        
-        for (let i = 0; i < sections.length; i++) {
-            const sectionTop = $(sections[i]).offset().top;
-            
-            if (sectionTop >= scrollPosition - 100) {
-                return prev;
-            }
-            
-            prev = sections[i];
-        }
-        
-        return null;
-    }
-});
+     // Set social media URLs from config
+     $('#linkedinBtn, .footer a:nth-child(1)').attr('href', linkedinUrl);
+     $('#githubBtn, .footer a:nth-child(2)').attr('href', githubUrl);
+     
+     // Add animation effects for elements when scrolling into view
+     const animateOnScroll = function() {
+         const windowHeight = $(window).height();
+         const scrollTop = $(window).scrollTop();
+         
+         $('.about-card, .skill-item, .timeline-item, .card').each(function() {
+             const elementTop = $(this).offset().top;
+             
+             if (elementTop < (scrollTop + windowHeight - 100)) {
+                 $(this).addClass('animate__animated animate__fadeInUp');
+             }
+         });
+     };
+     
+     // Run animation on load
+     animateOnScroll();
+     
+     // Run animation on scroll
+     $(window).scroll(function() {
+         animateOnScroll();
+     });
+ });
