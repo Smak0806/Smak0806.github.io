@@ -1,17 +1,32 @@
-.bodyBanner>section>h2{margin-left: 1em; margin-top:2em; margin-bottom:1em; font-size:40px;font-weight: bolder;}
-.bodyBanner>section>div{margin-bottom:4.5em;}
-.bodyBanner>section>div>h1{margin:1em 1em;font-size:46px;}
-.bodyBanner>section>div>h2{margin:1em 1em;font-size:40px;}
-.bodyBanner>section>div>h3{margin:1em 1em;font-size:36px;}
-.bodyBanner>section>div>h4{margin:1em 2.5em;font-size:26px; font-weight: bolder; color: #d1d1d1;}
-.bodyBanner>section>div>h5{margin:1em 3em;font-size:24px;}
-.bodyBanner>section>div>h6{margin:1em 5em;font-size:20px;}
-.bodyBanner>section>div>p{margin: 1em 6em;font-size:16px;}
-.bodyBanner>section>div>ul{margin: 1em 8em;list-style-type: circle;}
+.bodyBanner > section > h2 {font-size:40px;font-weight: bolder;}
+.bodyBanner > section > div {margin-bottom:4.5em;}
+.bodyBanner > section > div > h1{margin:1em auto; font-size:46px;}
+.bodyBanner > section > div > h2{margin:1em auto; font-size:40px;}
+.bodyBanner > section > div > h3{margin:1em auto; font-size:36px; font-weight: bolder; }
+.bodyBanner > section > div > h4{margin:1em auto; font-size:26px; font-weight: bolder; color: #d1d1d1;}
+.bodyBanner > section > div > h5{margin:1em auto; font-size:24px;}
+.bodyBanner > section > div > h6{margin:1em auto; font-size:20px;}
+.bodyBanner > section > div > p {margin:1em auto; font-size:16px;}
+.bodyBanner > section > div > ul{margin:1em auto; list-style-type: circle;}
+
+.profileInfoBanner > h2 {font-size:26px;font-weight:bolder}
+.profileInfoBanner > h3 {font-size:20px;}
+.profileInfoBanner > h3 > a{color:#cecece; font-size:20px;}
+.profileInfoBanner > h3 > a:hover{ color:#69c3f7;}
+
+.profileIndex > ul > li > a{color:#cecece;}
+.profileIndex > ul > li > a:hover{color:#69c3f7;}
+
+.bodyBanner > section > div > ul > li > a{color:#cecece;}
+.bodyBanner > section > div > ul > li > a:hover{color:#69c3f7;}
+
+.bodyBanner > section > div > p > a{color:#6cdcf8; text-decoration: underline;}
+.bodyBanner > section > div > p > a:hover{color:#40b3f5;}
 
 #ultra-super-mega-long-muchotexto-paragraph{
-    margin:1em 6em;
-    font-size: 16px;
+    margin: 1em 2em;
+    font-size: 18px;
+    line-height: 1.5em;
 }
 #ultra-super-mega-long-muchotexto-paragraph>p{
     margin-bottom: 1.5em;
@@ -35,7 +50,8 @@
 .sideBar{
     display: flex;
     flex-flow: column;
-    width: 80%;
+    /*width: 80%;*/
+    padding: 0px;
     background-color: #091c49;
 }
 
@@ -116,12 +132,23 @@
     padding-bottom:1em;
 }
 
+.imageBanner>img{
+    width:100%;
+    max-width: 500px;
+}
+
 .tittleBanner{
 
 }
 .tittleBanner h1{
     font-size:46px;
     font-weight: bolder;
+}
+
+.tittleBanner > h2{
+    text-align: center;
+    font-weight: bolder;
+    font-size:48px;
 }
 
 .content-box{
@@ -147,14 +174,22 @@
   
 .html {width: 90%; background-color: #04AA6D;}
 .css {width: 60%; background-color: #2196F3;}
+.bootstrap {width: 60%; background-color: #a4db5c;}
 .js {width: 65%; background-color: #f44336;}
 .jQuery{width: 50%; background-color: #9d9e54;}
 .npm{width: 15%; background-color: #da61cf;}
+.nodejs{width: 15%; background-color: #82cf95;}
+.nextjs{width: 15%; background-color: #8a72c2;}
+.ionic{width: 15%; background-color: #ceda61;}
 .php {width: 65%; background-color: #808080;}
+.laravel {width: 20%; background-color: #c084e7;}
 .sql{width: 30%; background-color: #64a084;}
+.ads{width: 15%; background-color: #994d93;}
+.tagManager{width: 15%; background-color: #6163da;}
+.analytics{width: 15%; background-color: #ebcd6d;}
 
 .spanish{width: 100%; background-color: #eea3a3;border-radius: 10px; }
-.english{width: 60%; background-color: #82ad7f;}
+.english{width: 70%; background-color: #82ad7f;}
 .italian {width: 40%; background-color: #7ad2dd;}
 .french{width: 30%; background-color: #5f9c5a;}
 
