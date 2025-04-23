@@ -1,0 +1,822 @@
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santiago Miguel Cabrera Gonzalez - Full-Stack Developer</title>
+    
+    <!-- Tailwind and DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+          tailwind.config = {
+               theme: {
+                    extend: {
+                         fontFamily: {
+                              sans: ['Inter', 'sans-serif'],
+                              maven: ['"Maven Pro"', 'sans-serif']
+                         },
+                         colors: {
+                              'primary-dark': '#1e1e2e',
+                              'secondary-dark': '#2a2a3c',
+                              'accent-blue': '#3b82f6',
+                              'accent-purple': '#8b5cf6',
+                              'text-light': '#f3f4f6',
+                         }
+                    }
+               }
+          }
+    </script>
+
+    <style>
+          .hero {
+               background-image: url('public/jumbo.webp');
+               background-size: cover;
+               background-position: center;
+               background-repeat: no-repeat;
+          }
+
+    </style>
+</head>
+<body class="bg-base-300 text-base-content font-sans">
+    <!-- Navbar -->
+     <nav class="navbar sticky top-0 z-50 bg-base-200 shadow-lg">
+          <div class="navbar-start">
+               <div class="dropdown">
+                    <label tabindex="0" class="btn btn-ghost lg:hidden">
+                         <i class="fas fa-bars"></i>
+                    </label>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52">
+                         <li><a href="#about">Sobre Mí</a></li>
+                         <li><a href="#skills">Habilidades</a></li>
+                         <li><a href="#experience">Experiencia laboral</a></li>
+                         <li><a href="#education">Educación</a></li>
+                         <li><a href="#projects">Proyectos</a></li>
+                    </ul>
+               </div>
+               <a class="btn btn-ghost normal-case text-xl font-maven">Santiago Cabrera</a>
+          </div>
+          <div class="navbar-center hidden lg:flex">
+               <ul class="menu menu-horizontal px-1">
+                    <li><a href="#about" class="hover:text-primary hover:bg-base-100">Sobre Mí</a></li>
+                    <li><a href="#skills" class="hover:text-primary hover:bg-base-100">Habilidades</a></li>
+                    <li><a href="#experience" class="hover:text-primary hover:bg-base-100">Experiencia laboral</a></li>
+                    <li><a href="#education" class="hover:text-primary hover:bg-base-100">Educación</a></li>
+                    <li><a href="#projects" class="hover:text-primary hover:bg-base-100">Proyectos</a></li>
+               </ul>
+          </div>
+          <div class="navbar-end">
+               <!--<a href="/Smak0806.github.io/?lang=en" class="btn btn-ghost mr-2">
+                    <i class="fas fa-language mr-1"></i> EN               </a>
+               <button id="downloadCV" class="btn btn-primary">Descargar CV <i class="fas fa-download ml-2"></i></button>-->
+          </div>
+     </nav>
+
+    <!-- Hero Section -->
+     <section class="hero min-h-[70vh] bg-base-200">
+          <div class="hero-content flex-col lg:flex-row-reverse bg-black bg-opacity-70 p-10 rounded-lg shadow-lg">
+               <div class="profile-image-container">
+                    <img src="assets/img/profile.jpg" class="max-w-sm rounded-lg shadow-2xl profile-image" alt="Santiago Miguel Cabrera Gonzalez">
+               </div>
+               <div>
+                    <h1 class="text-5xl font-bold font-maven">Santiago Miguel Cabrera Gonzalez</h1>
+                    <h2 class="text-2xl mt-2 text-primary">Full-Stack Developer</h2>
+                    <p class="py-6 text-white">Desarrollador full-stack con más de 6 años de experiencia, especializado en PHP, JavaScript, SQL y Git. Competente en la creación de APIs con Laravel y su documentación con Swagger. Con experiencia en la gestión de solicitudes y respuestas de APIs, configuración de CronJobs en servidores, desarrollo de diversas funcionalidades y resolución de errores. Hábil en la implementación de diseños UI/UX a partir de materiales proporcionados por diseñadores, realización de consultas en bases de datos SQL y trabajo con Ionic-Angular para el desarrollo de aplicaciones móviles.</p>
+                    <div class="flex flex-wrap gap-3">
+                         <a href="mailto:santiago.cabrera0806@gmail.com" class="btn btn-primary">
+                              <i class="fas fa-envelope mr-2"></i> Contáctame                         </a>
+                         <a href="https://www.linkedin.com/in/santiago-cabrerag/" class="btn btn-outline btn-accent" id="linkedinBtn">
+                              <i class="fab fa-linkedin mr-2"></i> LinkedIn                         </a>
+                         <a href="https://github.com/Smak0806" class="btn btn-outline" id="githubBtn">
+                              <i class="fab fa-github mr-2"></i> GitHub                         </a>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-base-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center font-maven">Sobre Mí</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="about-card p-6 bg-base-200 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4"><i class="fas fa-user-circle mr-2 text-primary"></i> Información Personal</h3>
+                    <ul class="space-y-3">
+                        <li><strong>Ubicación:</strong> Valencia, Spain</li>
+                        <li><strong>De:</strong> Caracas, Venezuela (Viviendo en España desde 2016)</li>
+                        <li><strong>Fecha de Nacimiento:</strong> 08/06/1993</li>
+                        <li><strong>Correo electrónico:</strong> <a href="mailto:santiago.cabrera0806@gmail.com" class="link link-primary">santiago.cabrera0806@gmail.com</a></li>
+                    </ul>
+                </div>
+                <div class="about-card p-6 bg-base-200 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4"><i class="fas fa-laptop-code mr-2 text-primary"></i> Resumen Profesional</h3>
+                    <p>Desarrollador full-stack con más de 6 años de experiencia profesional, con un enfoque sólido en tecnologías backend y frontend como PHP, JavaScript, SQL y control de versiones con Git. A lo largo de mi carrera he trabajado en una amplia gama de aplicaciones y sistemas web, adquiriendo experiencia en el diseño de arquitecturas escalables, escritura de código limpio y mantenible, e integración de servicios de terceros.</p>
+                    <p class="mt-3">Alta competencia en la creación de APIs RESTful robustas utilizando Laravel, asegurando eficiencia y seguridad en la lógica del lado del servidor. También tengo experiencia en la documentación de APIs con Swagger (OpenAPI), elaborando referencias claras y accesibles tanto para equipos internos como para desarrolladores externos, lo que facilita una integración fluida y la colaboración en los proyectos. A lo largo de mi carrera, he trabajado de forma independiente y en equipos, gestionando proyectos directamente con clientes y bajo product managers. Me he adaptado a diversos entornos y tecnologías, siempre enfocado en entregar soluciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-base-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center font-maven">Habilidades</h2>
+            
+            <div class="tabs tabs-boxed justify-center mb-8">
+                <a class="tab skill-tab active" data-target="languages">Lenguajes de programación</a>
+                <a class="tab skill-tab" data-target="frameworks">Frameworks</a>
+                <a class="tab skill-tab" data-target="tools">Herramientas</a>
+                <a class="tab skill-tab" data-target="other">Otros</a>
+            </div>
+            
+            <div class="skill-content" id="languages-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">HTML</span>
+                            <span>90%</span>
+                        </div>
+                        <progress class="progress progress-primary" value="90" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">CSS</span>
+                            <span>60%</span>
+                        </div>
+                        <progress class="progress progress-primary" value="60" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">JavaScript</span>
+                            <span>65%</span>
+                        </div>
+                        <progress class="progress progress-primary" value="65" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">PHP</span>
+                            <span>65%</span>
+                        </div>
+                        <progress class="progress progress-primary" value="65" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">SQL / MySQL</span>
+                            <span>50%</span>
+                        </div>
+                        <progress class="progress progress-primary" value="50" max="100"></progress>
+                    </div>
+                                    </div>
+            </div>
+            
+            <div class="skill-content hidden" id="frameworks-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Bootstrap</span>
+                            <span>60%</span>
+                        </div>
+                        <progress class="progress progress-accent" value="60" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">jQuery</span>
+                            <span>50%</span>
+                        </div>
+                        <progress class="progress progress-accent" value="50" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Laravel</span>
+                            <span>60%</span>
+                        </div>
+                        <progress class="progress progress-accent" value="60" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Next.js</span>
+                            <span>40%</span>
+                        </div>
+                        <progress class="progress progress-accent" value="40" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Tailwind CSS</span>
+                            <span>55%</span>
+                        </div>
+                        <progress class="progress progress-accent" value="55" max="100"></progress>
+                    </div>
+                                    </div>
+            </div>
+            
+            <div class="skill-content hidden" id="tools-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Git</span>
+                            <span>70%</span>
+                        </div>
+                        <progress class="progress progress-secondary" value="70" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">NPM</span>
+                            <span>50%</span>
+                        </div>
+                        <progress class="progress progress-secondary" value="50" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Node.js</span>
+                            <span>45%</span>
+                        </div>
+                        <progress class="progress progress-secondary" value="45" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">RESTful APIs</span>
+                            <span>75%</span>
+                        </div>
+                        <progress class="progress progress-secondary" value="75" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Swagger</span>
+                            <span>60%</span>
+                        </div>
+                        <progress class="progress progress-secondary" value="60" max="100"></progress>
+                    </div>
+                                    </div>
+            </div>
+            
+            <div class="skill-content hidden" id="other-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Ionic (Angular)</span>
+                            <span>40%</span>
+                        </div>
+                        <progress class="progress progress-info" value="40" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Google Ads</span>
+                            <span>15%</span>
+                        </div>
+                        <progress class="progress progress-info" value="15" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Google Tag Manager</span>
+                            <span>15%</span>
+                        </div>
+                        <progress class="progress progress-info" value="15" max="100"></progress>
+                    </div>
+                                        <div class="p-4 bg-base-100 rounded-lg shadow skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="font-semibold">Google Analytics</span>
+                            <span>15%</span>
+                        </div>
+                        <progress class="progress progress-info" value="15" max="100"></progress>
+                    </div>
+                                    </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold mt-12 mb-6 text-center">Idiomas</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                                <div class="p-4 bg-base-100 rounded-lg shadow text-center">
+                    <div class="radial-progress mx-auto" style="--value:100; --size:8rem; --thickness: 0.8rem;" role="progressbar">100%</div>
+                    <p class="mt-3 font-medium">Spanish</p>
+                </div>
+                                <div class="p-4 bg-base-100 rounded-lg shadow text-center">
+                    <div class="radial-progress mx-auto" style="--value:70; --size:8rem; --thickness: 0.8rem;" role="progressbar">70%</div>
+                    <p class="mt-3 font-medium">English</p>
+                </div>
+                                <div class="p-4 bg-base-100 rounded-lg shadow text-center">
+                    <div class="radial-progress mx-auto" style="--value:40; --size:8rem; --thickness: 0.8rem;" role="progressbar">40%</div>
+                    <p class="mt-3 font-medium">Italian</p>
+                </div>
+                                <div class="p-4 bg-base-100 rounded-lg shadow text-center">
+                    <div class="radial-progress mx-auto" style="--value:30; --size:8rem; --thickness: 0.8rem;" role="progressbar">30%</div>
+                    <p class="mt-3 font-medium">French</p>
+                </div>
+                            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 bg-base-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center font-maven">Experiencia laboral</h2>
+            
+            <div class="timeline">
+                                <div class="timeline-item left">
+                    <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300">
+                        <div class="card-body">
+                            <h3 class="card-title text-xl font-bold">Desarrollador Full-Stack</h3>
+                            <h4 class="text-lg text-primary">Movemo Ibérica, S.L.</h4>
+                            <p class="text-sm opacity-80">
+                                Valencia, España | 
+                                Ago. 2022 
+                                to 
+                                Present                            </p>
+                            
+                            <ul class="mt-4 space-y-2">
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Desarrollo de la plataforma www.momoven.es, tanto en back-end como en front-end.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Stack: PHP, MySQL, jQuery, HTML, Bootstrap.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Manejo de base de datos. Desde su creación, puesta en producción hasta las actualizaciones de sus datos.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Manejo de versiones con Git.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Sprints semanales controlados y documentados en Asana.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Análisis de documentación e instalación e uso de librerías de terceros.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Desarrollo de features, constante integración en producción.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Stack de google: Google Analytics. Google Ads. Google Tag Manager.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Creación de API usando los servicios de Laravel.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Actualización de App: desarrollo de front-end con Ionic(Angular) y back-end en PHP nativo.</span>
+                                </li>
+                                                            </ul>
+                            
+                            <div class="card-actions justify-end mt-4">
+                                <div class="flex flex-wrap gap-2">
+                                                                        <span class="badge badge-primary">PHP</span>
+                                                                        <span class="badge badge-primary">MySQL</span>
+                                                                        <span class="badge badge-primary">jQuery</span>
+                                                                        <span class="badge badge-primary">HTML</span>
+                                                                        <span class="badge badge-primary">Bootstrap</span>
+                                                                        <span class="badge badge-primary">Git</span>
+                                                                        <span class="badge badge-primary">Asana</span>
+                                                                        <span class="badge badge-primary">Google Analytics</span>
+                                                                        <span class="badge badge-primary">Google Ads</span>
+                                                                        <span class="badge badge-primary">Google Tag Manager</span>
+                                                                        <span class="badge badge-primary">Laravel</span>
+                                                                        <span class="badge badge-primary">Ionic</span>
+                                                                        <span class="badge badge-primary">Angular</span>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="timeline-item right">
+                    <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300">
+                        <div class="card-body">
+                            <h3 class="card-title text-xl font-bold">Análisis de datos, desarrollador de Software, programador industrial (PLC) y desarrollo web (Full-Stack)</h3>
+                            <h4 class="text-lg text-primary">Eliwell Ibérica, S.A.</h4>
+                            <p class="text-sm opacity-80">
+                                Valencia, España | 
+                                Oct. 2018 
+                                to 
+                                Ago. 2022                            </p>
+                            
+                            <ul class="mt-4 space-y-2">
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Análisis de datos para escritura de drivers ModBus para sistema Televis GO y Compact Touch de Eliwell.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Asesoría y soporte técnico de redes industriales de protocolo ModBus.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Análisis de manuales de uso y programación de instrumentos.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Diseño y desarrollo de aplicaciones web. (JavaScript, NodeJs, PHP).</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Diseño y desarrollo de herramientas de trabajo y herramientas de análisis BI.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Trato, asesoría y consultoría técnica directa con el cliente.</span>
+                                </li>
+                                                            </ul>
+                            
+                            <div class="card-actions justify-end mt-4">
+                                <div class="flex flex-wrap gap-2">
+                                                                        <span class="badge badge-primary">JavaScript</span>
+                                                                        <span class="badge badge-primary">NodeJs</span>
+                                                                        <span class="badge badge-primary">PHP</span>
+                                                                        <span class="badge badge-primary">ModBus</span>
+                                                                        <span class="badge badge-primary">BI Tools</span>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="timeline-item left">
+                    <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300">
+                        <div class="card-body">
+                            <h3 class="card-title text-xl font-bold">Desarrollo web Full-stack</h3>
+                            <h4 class="text-lg text-primary">Tewis Smart Systems</h4>
+                            <p class="text-sm opacity-80">
+                                Valencia, España | 
+                                Nov. 2018 
+                                to 
+                                Jun. 2021                            </p>
+                            
+                            <ul class="mt-4 space-y-2">
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Desarrollo de catálogo digital interactivo. Un catálogo que permite seleccionar una máquina según los criterios y necesidades del usuario.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Desarrollo Web y administración de la aplicación.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Creación dinámica de fichas técnicas en PDF usando PHP.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Administración de Base de Datos (Microsoft Access DB).</span>
+                                </li>
+                                                            </ul>
+                            
+                            <div class="card-actions justify-end mt-4">
+                                <div class="flex flex-wrap gap-2">
+                                                                        <span class="badge badge-primary">HTML5</span>
+                                                                        <span class="badge badge-primary">JavaScript</span>
+                                                                        <span class="badge badge-primary">AJAX</span>
+                                                                        <span class="badge badge-primary">jQuery</span>
+                                                                        <span class="badge badge-primary">PHP</span>
+                                                                        <span class="badge badge-primary">CSS</span>
+                                                                        <span class="badge badge-primary">SQL</span>
+                                                                        <span class="badge badge-primary">MS Access</span>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="timeline-item right">
+                    <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300">
+                        <div class="card-body">
+                            <h3 class="card-title text-xl font-bold">Desarrollador web Full-Stack</h3>
+                            <h4 class="text-lg text-primary">Ministerio de Hacienda y Función Pública</h4>
+                            <p class="text-sm opacity-80">
+                                Valencia, España | 
+                                Sept. 2016 
+                                to 
+                                Jun. 2018                            </p>
+                            
+                            <ul class="mt-4 space-y-2">
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Prácticas realizadas en la Gerencia Regional de Catastro de Valencia.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>800 horas de prácticas en ámbito profesional no remuneradas.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Mayormente trabajé con PHP, empecé desde cero y con la práctica, leyendo código y el manual de PHP, en poco tiempo ya estaba escribiendo código y creando cosas. Es el lenguaje que más me entretiene y con el que estoy más familiarizado.</span>
+                                </li>
+                                                            </ul>
+                            
+                            <div class="card-actions justify-end mt-4">
+                                <div class="flex flex-wrap gap-2">
+                                                                        <span class="badge badge-primary">Java</span>
+                                                                        <span class="badge badge-primary">JSP</span>
+                                                                        <span class="badge badge-primary">PHP</span>
+                                                                        <span class="badge badge-primary">jQuery</span>
+                                                                        <span class="badge badge-primary">Bootstrap</span>
+                                                                        <span class="badge badge-primary">PostgreSQL</span>
+                                                                        <span class="badge badge-primary">SQL</span>
+                                                                        <span class="badge badge-primary">CSS</span>
+                                                                        <span class="badge badge-primary">JavaScript</span>
+                                                                        <span class="badge badge-primary">HTML5</span>
+                                                                        <span class="badge badge-primary">WordPress</span>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16 bg-base-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center font-maven">Educación</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl">Técnico Superior</h3>
+                        <h4 class="text-lg text-primary">Desarrollo de Aplicaciones Web (DAW)</h4>
+                        <p class="text-sm opacity-80">
+                            Aula Campus, Valencia, España | 
+                            2016 
+                            to 
+                            2018                        </p>
+                        
+                                                <div class="mt-4">
+                            <h5 class="font-medium mb-2">Descripción</h5>
+                            <ul class="space-y-2">
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Introducción a la programación mediante el aprendizaje de Java y SQL.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Análisis, diagramas y manejo de bases de datos mediante consultas SQL/MySQL e interfaces gráficas.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Elaboración de páginas web dinámicas y estáticas: HTML, CSS, Bootstrap, JavaScript, PHP, AJAX, jQuery.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Análisis y elaboración de diagramas de planificación y trabajo. Conocimientos de Entornos de trabajo y control de versiones (Git).</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Realización de FP-Dual. Total de 400 horas de práctica en campo laboral.</span>
+                                </li>
+                                                            </ul>
+                        </div>
+                                                
+                                                <div class="mt-4">
+                            <h5 class="font-medium mb-2">Habilidades</h5>
+                            <ul class="space-y-2">
+                                                                <li class="flex">
+                                    <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                                    <span>Administración de base de datos SQL y MySQL.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                                    <span>Control de Versiones.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                                    <span>Creación de proyectos web desde cero, desde la base de datos hasta el front-end y el back-end, usando PHP y JavaScript.</span>
+                                </li>
+                                                            </ul>
+                        </div>
+                                                
+                                                <div class="card-actions justify-start mt-4">
+                            <div class="collapse collapse-arrow bg-base-200">
+                                <input type="checkbox" /> 
+                                <div class="collapse-title text-sm font-medium">
+                                    <i class="fas fa-certificate mr-2 text-yellow-500"></i> Certificados                                </div>
+                                <div class="collapse-content"> 
+                                    <ul class="space-y-2">
+                                                                                <li>
+                                            <a href="https://mylearn.oracle.com/ou/learning-path/oracle-database-explorer/79873" target="_blank" class="link link-primary">
+                                                ORACLE SQL <i class="fas fa-external-link-alt text-xs"></i>
+                                            </a>
+                                        </li>
+                                                                                <li>
+                                            <a href="https://mylearn.oracle.com/ou/course/java-se-11-programming-complete/78835" target="_blank" class="link link-primary">
+                                                Java SE 11 Developer <i class="fas fa-external-link-alt text-xs"></i>
+                                            </a>
+                                        </li>
+                                                                            </ul>
+                                </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl">Educación Secundaria (ESO) y Bachillerato</h3>
+                        <h4 class="text-lg text-primary">Mención: Ciencias</h4>
+                        <p class="text-sm opacity-80">
+                            U.E. Colegio Americo Vespucio, Caracas, Venezuela | 
+                            2005 
+                            to 
+                            2010                        </p>
+                        
+                                                <div class="mt-4">
+                            <h5 class="font-medium mb-2">Descripción</h5>
+                            <ul class="space-y-2">
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Educación Secundaria y Bachillerato con mención en Ciencias.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Estudios de idioma Italiano.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Actividades artísticas como pintura y dibujo.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Actividades deportivas como béisbol, fútbol y baloncesto.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Entrenamiento en lectura rápida con enfoque en comprensión y retención.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>Tesis (Trabajo final): Energía solar como alternativa para contrarestar la crisis energética en Venezuela. Aprobada con 19 puntos en escala de 20.</span>
+                                </li>
+                                                            </ul>
+                        </div>
+                                                
+                                                <div class="mt-4">
+                            <h5 class="font-medium mb-2">Habilidades</h5>
+                            <ul class="space-y-2">
+                                                                <li class="flex">
+                                    <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                                    <span>Emprendimiento y desarrollo de ideas para Pymes.</span>
+                                </li>
+                                                                <li class="flex">
+                                    <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                                    <span>Inglés nivel bilingüe, Italiano y Francés niveles medio.</span>
+                                </li>
+                                                            </ul>
+                        </div>
+                                                
+                                                <div class="card-actions justify-start mt-4">
+                            <div class="collapse collapse-arrow bg-base-200">
+                                <input type="checkbox" /> 
+                                <div class="collapse-title text-sm font-medium">
+                                    <i class="fas fa-certificate mr-2 text-yellow-500"></i> Certificados                                </div>
+                                <div class="collapse-content"> 
+                                    <ul class="space-y-2">
+                                                                                <li>
+                                            <a href="https://afcaracas.com/inicio-alianza-francesa-caracas/cursos-de-frances/" target="_blank" class="link link-primary">
+                                                Francés B1 - Alianza Francesa de Caracas <i class="fas fa-external-link-alt text-xs"></i>
+                                            </a>
+                                        </li>
+                                                                            </ul>
+                                </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-base-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center font-maven">Proyectos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                <div class="card bg-base-200 shadow-xl hover:-translate-y-2 transition-all duration-300">
+                    <div class="card-body">
+                        <h3 class="card-title">Momoven</h3>
+                        <p>Plataforma de alquiler de motocicletas.</p>
+                        <div class="flex flex-wrap gap-2 my-4">
+                                                        <span class="badge badge-outline">PHP</span>
+                                                        <span class="badge badge-outline">MySQL</span>
+                                                        <span class="badge badge-outline">jQuery</span>
+                                                        <span class="badge badge-outline">HTML</span>
+                                                        <span class="badge badge-outline">Bootstrap</span>
+                                                    </div>
+                        <div class="card-actions justify-end">
+                            <a href="http://www.momoven.es/flota-momoven" target="_blank" class="btn btn-primary btn-sm">
+                                View Project <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                                <div class="card bg-base-200 shadow-xl hover:-translate-y-2 transition-all duration-300">
+                    <div class="card-body">
+                        <h3 class="card-title">Fake Rally Rider</h3>
+                        <p>Website de alquiler de motos.</p>
+                        <div class="flex flex-wrap gap-2 my-4">
+                                                        <span class="badge badge-outline">Next.js</span>
+                                                        <span class="badge badge-outline">Tailwind</span>
+                                                        <span class="badge badge-outline">CSS</span>
+                                                        <span class="badge badge-outline">TypeScript</span>
+                                                    </div>
+                        <div class="card-actions justify-end">
+                            <a href="http://www.fakerallyrider.com" target="_blank" class="btn btn-primary btn-sm">
+                                View Project <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                                <div class="card bg-base-200 shadow-xl hover:-translate-y-2 transition-all duration-300">
+                    <div class="card-body">
+                        <h3 class="card-title">Qwertium.es</h3>
+                        <p>Página web de consultoría IT.</p>
+                        <div class="flex flex-wrap gap-2 my-4">
+                                                        <span class="badge badge-outline">Next.js</span>
+                                                        <span class="badge badge-outline">Tailwind CSS</span>
+                                                    </div>
+                        <div class="card-actions justify-end">
+                            <a href="http://www.qwertium.es/" target="_blank" class="btn btn-primary btn-sm">
+                                View Project <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content">
+        <div>
+            <p class="font-bold text-xl">Santiago Miguel Cabrera Gonzalez</p>
+            <p>Full-Stack Developer</p>
+            <p>Don't ask me about PHP (: </p>
+        </div> 
+        <div>
+            <div class="grid grid-flow-col gap-4">
+                <a href="https://www.linkedin.com/in/santiago-cabrerag/" class="btn btn-circle btn-outline"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Smak0806/" class="btn btn-circle btn-outline"><i class="fab fa-github"></i></a>
+                <a href="mailto:santiago.cabrera0806@gmail.com" class="btn btn-circle btn-outline"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="backToTop" class="btn btn-circle btn-primary fixed bottom-8 right-8 opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Language handling script -->
+    <script>
+        // Add information about active language to body for CSS styling purposes
+        document.body.setAttribute('data-lang', 'es');
+        
+        // Handle skill tabs
+        $(document).ready(function() {
+            $('.skill-tab').click(function() {
+                // Remove active class from all tabs
+                $('.skill-tab').removeClass('active');
+                // Add active class to clicked tab
+                $(this).addClass('active');
+                
+                // Hide all content
+                $('.skill-content').addClass('hidden');
+                // Show content for clicked tab
+                $('#' + $(this).data('target') + '-content').removeClass('hidden');
+            });
+            
+            // Back to top button functionality
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#backToTop').removeClass('opacity-0 invisible').addClass('opacity-100 visible');
+                } else {
+                    $('#backToTop').removeClass('opacity-100 visible').addClass('opacity-0 invisible');
+                }
+            });
+            
+            $('#backToTop').click(function() {
+                $('html, body').animate({scrollTop: 0}, 500);
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>
